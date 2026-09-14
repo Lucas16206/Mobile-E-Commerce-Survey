@@ -1,0 +1,2165 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>🔒 Khảo sát An toàn thông tin</title>
+
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        html {
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Inter', Arial, sans-serif;
+            min-height: 100vh;
+            color: #ffffff;
+
+            background:
+                radial-gradient(
+                    circle at 10% 10%,
+                    rgba(124, 92, 246, 0.28),
+                    transparent 30%
+                ),
+                radial-gradient(
+                    circle at 90% 20%,
+                    rgba(96, 80, 220, 0.20),
+                    transparent 28%
+                ),
+                radial-gradient(
+                    circle at 50% 100%,
+                    rgba(139, 92, 246, 0.16),
+                    transparent 35%
+                ),
+                linear-gradient(
+                    135deg,
+                    #090714 0%,
+                    #15102a 45%,
+                    #0b0a19 100%
+                );
+
+            padding: 20px;
+            overflow-x: hidden;
+        }
+
+        /* Ánh sáng trang trí nền */
+
+        body::before {
+            content: "";
+            position: fixed;
+
+            width: 420px;
+            height: 420px;
+
+            top: -180px;
+            left: -180px;
+
+            border-radius: 50%;
+
+            background: rgba(124, 92, 246, 0.18);
+
+            filter: blur(90px);
+
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        body::after {
+            content: "";
+            position: fixed;
+
+            width: 420px;
+            height: 420px;
+
+            right: -180px;
+            bottom: -180px;
+
+            border-radius: 50%;
+
+            background: rgba(79, 70, 229, 0.16);
+
+            filter: blur(90px);
+
+            pointer-events: none;
+            z-index: -1;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 850px;
+            margin: 0 auto;
+        }
+
+
+        /* =========================================
+           HEADER
+        ========================================= */
+
+        .header {
+            position: relative;
+            overflow: hidden;
+
+            text-align: center;
+
+            padding: 38px 25px 42px;
+
+            border-radius: 24px 24px 0 0;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #7568df 0%,
+                    #6d51bd 50%,
+                    #55409c 100%
+                );
+
+            border: 1px solid rgba(255, 255, 255, 0.14);
+
+            box-shadow:
+                0 20px 60px rgba(0, 0, 0, 0.30);
+        }
+
+        .header::before {
+            content: "";
+
+            position: absolute;
+
+            width: 330px;
+            height: 330px;
+
+            top: -220px;
+            right: -100px;
+
+            border-radius: 50%;
+
+            background: rgba(255, 255, 255, 0.10);
+
+            filter: blur(8px);
+        }
+
+        .header::after {
+            content: "";
+
+            position: absolute;
+
+            left: -5%;
+            bottom: -45px;
+
+            width: 110%;
+            height: 75px;
+
+            background: #1b1535;
+
+            border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+
+            opacity: 0.90;
+        }
+
+        .lock {
+            position: relative;
+            z-index: 2;
+
+            font-size: 46px;
+
+            margin-bottom: 10px;
+
+            filter:
+                drop-shadow(
+                    0 7px 12px rgba(0, 0, 0, 0.20)
+                );
+        }
+
+        .header h1 {
+            position: relative;
+            z-index: 2;
+
+            font-size: 27px;
+            font-weight: 800;
+
+            line-height: 1.3;
+
+            margin-bottom: 9px;
+
+            letter-spacing: -0.4px;
+        }
+
+        .subtitle {
+            position: relative;
+            z-index: 2;
+
+            max-width: 720px;
+
+            margin: 0 auto;
+
+            font-size: 13.5px;
+
+            line-height: 1.55;
+
+            color: rgba(255, 255, 255, 0.93);
+        }
+
+        .info {
+            position: relative;
+            z-index: 3;
+
+            display: flex;
+
+            justify-content: center;
+            align-items: center;
+
+            flex-wrap: wrap;
+
+            gap: 9px;
+
+            margin-top: 17px;
+
+            font-size: 12px;
+
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .separator {
+            opacity: 0.55;
+        }
+
+
+        /* =========================================
+           PROGRESS
+        ========================================= */
+
+        .progress-section {
+            padding: 14px 28px 20px;
+
+            background: rgba(27, 21, 53, 0.96);
+
+            border-left: 1px solid rgba(255, 255, 255, 0.08);
+            border-right: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .progress-text {
+            text-align: right;
+
+            font-size: 11px;
+
+            color: rgba(255, 255, 255, 0.48);
+
+            margin-bottom: 7px;
+        }
+
+        .progress-track {
+            width: 100%;
+            height: 7px;
+
+            border-radius: 50px;
+
+            background: rgba(255, 255, 255, 0.09);
+
+            overflow: hidden;
+        }
+
+        .progress-bar {
+            width: 0%;
+            height: 100%;
+
+            border-radius: 50px;
+
+            background:
+                linear-gradient(
+                    90deg,
+                    #8b7cf6,
+                    #a78bfa,
+                    #6366f1
+                );
+
+            box-shadow:
+                0 0 14px rgba(139, 92, 246, 0.60);
+
+            transition: width 0.3s ease;
+        }
+
+
+        /* =========================================
+           FORM
+        ========================================= */
+
+        .form-card {
+            margin-top: 20px;
+
+            padding: 22px;
+
+            border-radius: 22px;
+
+            background: rgba(255, 255, 255, 0.055);
+
+            border: 1px solid rgba(255, 255, 255, 0.10);
+
+            backdrop-filter: blur(18px);
+            -webkit-backdrop-filter: blur(18px);
+
+            box-shadow:
+                0 25px 70px rgba(0, 0, 0, 0.30);
+        }
+
+
+        /* =========================================
+           QUESTION
+        ========================================= */
+
+        .question {
+            margin-bottom: 18px;
+
+            padding: 21px;
+
+            border-radius: 17px;
+
+            background: rgba(255, 255, 255, 0.045);
+
+            border: 1px solid rgba(255, 255, 255, 0.09);
+
+            transition:
+                background 0.2s ease,
+                border-color 0.2s ease,
+                transform 0.2s ease;
+        }
+
+        .question:hover {
+            background: rgba(255, 255, 255, 0.065);
+
+            border-color:
+                rgba(167, 139, 250, 0.30);
+
+            transform: translateY(-1px);
+        }
+
+        .question-title {
+            margin-bottom: 15px;
+
+            font-size: 14px;
+
+            line-height: 1.65;
+
+            font-weight: 700;
+
+            color: rgba(255, 255, 255, 0.95);
+        }
+
+        .number {
+            display: inline-flex;
+
+            align-items: center;
+            justify-content: center;
+
+            min-width: 28px;
+            height: 28px;
+
+            margin-right: 7px;
+
+            border-radius: 9px;
+
+            background:
+                rgba(139, 92, 246, 0.20);
+
+            color: #b7a7ff;
+
+            font-size: 12px;
+
+            font-weight: 800;
+        }
+
+        .required {
+            color: #fb7185;
+        }
+
+
+        /* =========================================
+           OPTIONS
+        ========================================= */
+
+        .options {
+            display: flex;
+
+            flex-direction: column;
+
+            gap: 8px;
+        }
+
+        .option {
+            display: flex;
+
+            align-items: flex-start;
+
+            gap: 11px;
+
+            padding: 12px 13px;
+
+            border-radius: 12px;
+
+            border: 1px solid rgba(255, 255, 255, 0.085);
+
+            background: rgba(255, 255, 255, 0.028);
+
+            cursor: pointer;
+
+            transition:
+                background 0.18s ease,
+                border-color 0.18s ease,
+                transform 0.18s ease;
+        }
+
+        .option:hover {
+            background:
+                rgba(139, 92, 246, 0.10);
+
+            border-color:
+                rgba(167, 139, 250, 0.38);
+
+            transform: translateX(2px);
+        }
+
+        .option.selected {
+            background:
+                rgba(139, 92, 246, 0.17);
+
+            border-color:
+                rgba(167, 139, 250, 0.62);
+
+            box-shadow:
+                0 4px 18px rgba(0, 0, 0, 0.10);
+        }
+
+        .option input {
+            width: 18px;
+            height: 18px;
+
+            margin-top: 1px;
+
+            flex-shrink: 0;
+
+            accent-color: #8b5cf6;
+
+            cursor: pointer;
+        }
+
+        .option-text {
+            font-size: 13px;
+
+            line-height: 1.55;
+
+            color:
+                rgba(255, 255, 255, 0.80);
+        }
+
+
+        /* =========================================
+           ERROR
+        ========================================= */
+
+        .question.error {
+            border-color:
+                rgba(248, 113, 113, 0.65);
+
+            background:
+                rgba(248, 113, 113, 0.06);
+        }
+
+        .error-message {
+            display: none;
+
+            margin-top: 10px;
+
+            font-size: 11px;
+
+            color: #fca5a5;
+        }
+
+        .question.error .error-message {
+            display: block;
+        }
+
+
+        /* =========================================
+           SUBMIT
+        ========================================= */
+
+        .submit-area {
+            margin-top: 24px;
+
+            text-align: center;
+        }
+
+        .submit-btn {
+            width: 100%;
+
+            padding: 15px 20px;
+
+            border: none;
+
+            border-radius: 13px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #7c6be8,
+                    #6d4fc0,
+                    #5145b7
+                );
+
+            color: #ffffff;
+
+            font-family: inherit;
+
+            font-size: 15px;
+
+            font-weight: 700;
+
+            cursor: pointer;
+
+            box-shadow:
+                0 10px 30px rgba(93, 74, 190, 0.30);
+
+            transition:
+                transform 0.2s ease,
+                box-shadow 0.2s ease;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+
+            box-shadow:
+                0 14px 35px rgba(93, 74, 190, 0.42);
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        .submit-btn:disabled {
+            opacity: 0.55;
+
+            cursor: not-allowed;
+
+            transform: none;
+        }
+
+        .note {
+            margin-top: 10px;
+
+            font-size: 10.5px;
+
+            line-height: 1.5;
+
+            color:
+                rgba(255, 255, 255, 0.38);
+        }
+
+
+        /* =========================================
+           FOOTER
+        ========================================= */
+
+        .footer {
+            text-align: center;
+
+            padding: 22px 10px 30px;
+
+            font-size: 10.5px;
+
+            color:
+                rgba(255, 255, 255, 0.30);
+        }
+
+
+        /* =========================================
+           SUCCESS MODAL
+        ========================================= */
+
+        .modal-overlay {
+            display: none;
+
+            position: fixed;
+
+            inset: 0;
+
+            z-index: 9999;
+
+            align-items: center;
+            justify-content: center;
+
+            padding: 20px;
+
+            background:
+                rgba(5, 4, 12, 0.78);
+
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .modal-overlay.show {
+            display: flex;
+        }
+
+        .modal {
+            width: 100%;
+
+            max-width: 410px;
+
+            padding: 32px 26px;
+
+            text-align: center;
+
+            border-radius: 22px;
+
+            background: #211b3b;
+
+            border:
+                1px solid rgba(255, 255, 255, 0.13);
+
+            box-shadow:
+                0 30px 90px rgba(0, 0, 0, 0.55);
+        }
+
+        .modal-icon {
+            font-size: 48px;
+
+            margin-bottom: 10px;
+        }
+
+        .modal h2 {
+            margin-bottom: 10px;
+
+            font-size: 21px;
+
+            color: #ffffff;
+        }
+
+        .modal p {
+            font-size: 13px;
+
+            line-height: 1.6;
+
+            color:
+                rgba(255, 255, 255, 0.65);
+        }
+
+        .close-btn {
+            width: 100%;
+
+            margin-top: 20px;
+
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 11px;
+
+            background:
+                linear-gradient(
+                    135deg,
+                    #7565dc,
+                    #6047aa
+                );
+
+            color: #ffffff;
+
+            font-family: inherit;
+
+            font-weight: 700;
+
+            cursor: pointer;
+        }
+
+
+        /* =========================================
+           MOBILE
+        ========================================= */
+
+        @media (max-width: 600px) {
+
+            body {
+                padding: 7px;
+            }
+
+            .header {
+                padding: 34px 16px 39px;
+
+                border-radius:
+                    19px 19px 0 0;
+            }
+
+            .lock {
+                font-size: 42px;
+            }
+
+            .header h1 {
+                font-size: 22px;
+            }
+
+            .subtitle {
+                font-size: 12px;
+            }
+
+            .info {
+                font-size: 10.5px;
+
+                gap: 6px;
+            }
+
+            .progress-section {
+                padding:
+                    13px 17px 18px;
+            }
+
+            .form-card {
+                padding: 11px;
+
+                border-radius: 18px;
+            }
+
+            .question {
+                padding: 16px;
+
+                border-radius: 15px;
+            }
+
+            .question-title {
+                font-size: 13.5px;
+            }
+
+            .option {
+                padding: 11px;
+            }
+
+            .option-text {
+                font-size: 12px;
+            }
+
+            .submit-btn {
+                font-size: 14px;
+            }
+        }
+
+    </style>
+</head>
+
+
+<body>
+
+<div class="container">
+
+
+    <!-- =========================================
+         HEADER
+    ========================================= -->
+
+    <header class="header">
+
+        <div class="lock">
+            🔐
+        </div>
+
+        <h1>
+            Khảo sát An toàn thông tin
+        </h1>
+
+        <div class="subtitle">
+            Rủi ro bảo mật và quản trị an toàn thông tin
+            trên ứng dụng thương mại điện tử di động
+        </div>
+
+        <div class="info">
+
+            <span>⏱ 3-5 phút</span>
+
+            <span class="separator">|</span>
+
+            <span>🔒 Ẩn danh</span>
+
+            <span class="separator">|</span>
+
+            <span>📊 Phục vụ nghiên cứu học tập</span>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================================
+         PROGRESS
+    ========================================= -->
+
+    <div class="progress-section">
+
+        <div
+            class="progress-text"
+            id="progressText">
+
+            Tiến trình: 0%
+
+        </div>
+
+        <div class="progress-track">
+
+            <div
+                class="progress-bar"
+                id="progressBar">
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- =========================================
+         FORM
+    ========================================= -->
+
+    <form
+        id="surveyForm"
+        class="form-card">
+
+
+        <!-- =====================
+             CÂU 1
+        ====================== -->
+
+        <div
+            class="question"
+            data-question="q1">
+
+            <div class="question-title">
+
+                <span class="number">1</span>
+
+                Khi đăng nhập vào ứng dụng thương mại điện tử
+                trên điện thoại, bạn thường sử dụng phương thức nào?
+
+                <span class="required">*</span>
+
+            </div>
+
+
+            <div class="options">
+
+                <label class="option">
+
+                    <input
+                        type="radio"
+                        name="q1"
+                        value="A">
+
+                    <span class="option-text">
+                        A. Số điện thoại và mật khẩu
+                    </span>
+
+                </label>
+
+
+                <label class="option">
+
+                    <input
+                        type="radio"
+                        name="q1"
+                        value="B">
+
+                    <span class="option-text">
+                        B. Số điện thoại và mã OTP
+                    </span>
+
+                </label>
+
+
+                <label class="option">
+
+                    <input
+                        type="radio"
+                        name="q1"
+                        value="C">
+
+                    <span class="option-text">
+                        C. Tài khoản Google/Facebook/Apple
+                    </span>
+
+                </label>
+
+
+                <label class="option">
+
+                    <input
+                        type="radio"
+                        name="q1"
+                        value="D">
+
+                    <span class="option-text">
+                        D. Vân tay hoặc Face ID
+                    </span>
+
+                </label>
+
+
+                <label class="option">
+
+                    <input
+                        type="radio"
+                        name="q1"
+                        value="E">
+
+                    <span class="option-text">
+                        E. Kết hợp nhiều phương thức bảo mật như
+                        mật khẩu, OTP và sinh trắc học
+                    </span>
+
+                </label>
+
+            </div>
+
+            <div class="error-message">
+                ⚠️ Vui lòng chọn một đáp án.
+            </div>
+
+        </div>
+
+
+        <!-- =====================
+             CÂU 2
+        ====================== -->
+
+        <div
+            class="question"
+            data-question="q2">
+
+            <div class="question-title">
+
+                <span class="number">2</span>
+
+                Khi ứng dụng thương mại điện tử yêu cầu quyền truy cập
+                vào camera, vị trí, danh bạ hoặc thông báo,
+                bạn thường làm gì?
+
+                <span class="required">*</span>
+
+            </div>
+
+
+            <div class="options">
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q2"
+                        value="A">
+
+                    <span class="option-text">
+                        A. Cho phép tất cả các quyền được yêu cầu
+                    </span>
+                </label>
+
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q2"
+                        value="B">
+
+                    <span class="option-text">
+                        B. Cho phép vì ứng dụng thuộc sàn
+                        thương mại điện tử lớn
+                    </span>
+                </label>
+
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q2"
+                        value="C">
+
+                    <span class="option-text">
+                        C. Chỉ cho phép những quyền cần thiết
+                        để sử dụng một số chức năng
+                    </span>
+                </label>
+
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q2"
+                        value="D">
+
+                    <span class="option-text">
+                        D. Kiểm tra mục đích của từng quyền
+                        trước khi cho phép
+                    </span>
+                </label>
+
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q2"
+                        value="E">
+
+                    <span class="option-text">
+                        E. Thường xuyên kiểm tra và tắt những quyền
+                        không cần thiết trong cài đặt điện thoại
+                    </span>
+                </label>
+
+            </div>
+
+            <div class="error-message">
+                ⚠️ Vui lòng chọn một đáp án.
+            </div>
+
+        </div>
+
+
+        <!-- =====================
+             CÂU 3
+        ====================== -->
+
+        <div
+            class="question"
+            data-question="q3">
+
+            <div class="question-title">
+
+                <span class="number">3</span>
+
+                Bạn có lưu thông tin thẻ ngân hàng hoặc phương thức
+                thanh toán trên ứng dụng thương mại điện tử không?
+
+                <span class="required">*</span>
+
+            </div>
+
+
+            <div class="options">
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q3"
+                        value="A">
+
+                    <span class="option-text">
+                        A. Có, tôi lưu trên tất cả ứng dụng thường sử dụng
+                    </span>
+                </label>
+
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q3"
+                        value="B">
+
+                    <span class="option-text">
+                        B. Có, nhưng chỉ lưu trên những ứng dụng
+                        mà tôi tin tưởng
+                    </span>
+                </label>
+
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q3"
+                        value="C">
+
+                    <span class="option-text">
+                        C. Chỉ lưu khi thường xuyên mua hàng
+                        trên ứng dụng đó
+                    </span>
+                </label>
+
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q3"
+                        value="D">
+
+                    <span class="option-text">
+                        D. Hạn chế lưu và thường nhập thông tin
+                        thanh toán mỗi lần mua hàng
+                    </span>
+                </label>
+
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q3"
+                        value="E">
+
+                    <span class="option-text">
+                        E. Không lưu thông tin thẻ/ngân hàng
+                        trên ứng dụng thương mại điện tử
+                    </span>
+                </label>
+
+            </div>
+
+            <div class="error-message">
+                ⚠️ Vui lòng chọn một đáp án.
+            </div>
+
+        </div>
+
+
+        <!-- =====================
+             CÂU 4
+        ====================== -->
+
+        <div
+            class="question"
+            data-question="q4">
+
+            <div class="question-title">
+
+                <span class="number">4</span>
+
+                Khi sử dụng ứng dụng thương mại điện tử
+                trên Wi-Fi công cộng, bạn thường làm gì?
+
+                <span class="required">*</span>
+
+            </div>
+
+
+            <div class="options">
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q4"
+                        value="A">
+
+                    <span class="option-text">
+                        A. Sử dụng bình thường, kể cả đăng nhập và thanh toán
+                    </span>
+                </label>
+
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q4"
+                        value="B">
+
+                    <span class="option-text">
+                        B. Chỉ sử dụng để xem sản phẩm và giá cả
+                    </span>
+                </label>
+
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q4"
+                        value="C">
+
+                    <span class="option-text">
+                        C. Chỉ đăng nhập nhưng hạn chế thanh toán
+                    </span>
+                </label>
+
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q4"
+                        value="D">
+
+                    <span class="option-text">
+                        D. Chuyển sang sử dụng dữ liệu di động
+                        khi thực hiện giao dịch
+                    </span>
+                </label>
+
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q4"
+                        value="E">
+
+                    <span class="option-text">
+                        E. Tránh đăng nhập hoặc thực hiện giao dịch
+                        quan trọng khi đang dùng Wi-Fi công cộng
+                    </span>
+                </label>
+
+            </div>
+
+            <div class="error-message">
+                ⚠️ Vui lòng chọn một đáp án.
+            </div>
+
+        </div>
+
+
+        <!-- =====================
+             CÂU 5
+        ====================== -->
+
+        <div
+            class="question"
+            data-question="q5">
+
+            <div class="question-title">
+
+                <span class="number">5</span>
+
+                Nếu điện thoại bị mất trong khi tài khoản
+                thương mại điện tử vẫn đang đăng nhập,
+                bạn sẽ làm gì?
+
+                <span class="required">*</span>
+
+            </div>
+
+
+            <div class="options">
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q5"
+                        value="A">
+
+                    <span class="option-text">
+                        A. Chờ tìm lại điện thoại rồi mới xử lý
+                    </span>
+                </label>
+
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q5"
+                        value="B">
+
+                    <span class="option-text">
+                        B. Đổi mật khẩu tài khoản thương mại điện tử
+                    </span>
+                </label>
+
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q5"
+                        value="C">
+
+                    <span class="option-text">
+                        C. Khóa điện thoại từ xa
+                    </span>
+                </label>
+
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q5"
+                        value="D">
+
+                    <span class="option-text">
+                        D. Đăng xuất tài khoản khỏi thiết bị bị mất
+                        bằng một thiết bị khác
+                    </span>
+                </label>
+
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q5"
+                        value="E">
+
+                    <span class="option-text">
+                        E. Khóa điện thoại, đăng xuất tài khoản
+                        và kiểm tra/khóa các phương thức thanh toán
+                        đã liên kết
+                    </span>
+                </label>
+
+            </div>
+
+            <div class="error-message">
+                ⚠️ Vui lòng chọn một đáp án.
+            </div>
+
+        </div>
+
+
+        <!-- =====================
+             CÂU 6
+        ====================== -->
+
+        <div
+            class="question"
+            data-question="q6">
+
+            <div class="question-title">
+
+                <span class="number">6</span>
+
+                Bạn thường cập nhật ứng dụng thương mại điện tử
+                trên điện thoại như thế nào?
+
+                <span class="required">*</span>
+
+            </div>
+
+
+            <div class="options">
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q6"
+                        value="A">
+
+                    <span class="option-text">
+                        A. Hầu như không cập nhật nếu ứng dụng
+                        vẫn hoạt động bình thường
+                    </span>
+                </label>
+
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q6"
+                        value="B">
+
+                    <span class="option-text">
+                        B. Chỉ cập nhật khi ứng dụng bắt buộc phải cập nhật
+                    </span>
+                </label>
+
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q6"
+                        value="C">
+
+                    <span class="option-text">
+                        C. Cập nhật khi tôi tình cờ nhìn thấy thông báo
+                        có phiên bản mới
+                    </span>
+                </label>
+
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q6"
+                        value="D">
+
+                    <span class="option-text">
+                        D. Thường xuyên kiểm tra và cập nhật ứng dụng
+                    </span>
+                </label>
+
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q6"
+                        value="E">
+
+                    <span class="option-text">
+                        E. Bật tự động cập nhật ứng dụng để luôn sử dụng
+                        phiên bản mới nhất
+                    </span>
+                </label>
+
+            </div>
+
+            <div class="error-message">
+                ⚠️ Vui lòng chọn một đáp án.
+            </div>
+
+        </div>
+
+
+        <!-- =====================
+             CÂU 7
+        ====================== -->
+
+        <div
+            class="question"
+            data-question="q7">
+
+            <div class="question-title">
+
+                <span class="number">7</span>
+
+                Nếu nhận được thông báo trên điện thoại cho biết
+                tài khoản thương mại điện tử của bạn vừa thực hiện
+                một giao dịch mà bạn không thực hiện, bạn sẽ làm gì?
+
+                <span class="required">*</span>
+
+            </div>
+
+
+            <div class="options">
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q7"
+                        value="A">
+
+                    <span class="option-text">
+                        A. Bỏ qua vì nghĩ có thể là lỗi thông báo
+                    </span>
+                </label>
+
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q7"
+                        value="B">
+
+                    <span class="option-text">
+                        B. Nhấn trực tiếp vào thông báo để kiểm tra
+                    </span>
+                </label>
+
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q7"
+                        value="C">
+
+                    <span class="option-text">
+                        C. Mở ứng dụng thương mại điện tử
+                        để kiểm tra lịch sử giao dịch
+                    </span>
+                </label>
+
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q7"
+                        value="D">
+
+                    <span class="option-text">
+                        D. Kiểm tra giao dịch và đổi mật khẩu tài khoản
+                    </span>
+                </label>
+
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q7"
+                        value="E">
+
+                    <span class="option-text">
+                        E. Kiểm tra giao dịch, bảo vệ tài khoản,
+                        khóa phương thức thanh toán và liên hệ
+                        bộ phận hỗ trợ chính thức
+                    </span>
+                </label>
+
+            </div>
+
+            <div class="error-message">
+                ⚠️ Vui lòng chọn một đáp án.
+            </div>
+
+        </div>
+
+
+        <!-- =====================
+             CÂU 8
+        ====================== -->
+
+        <div
+            class="question"
+            data-question="q8">
+
+            <div class="question-title">
+
+                <span class="number">8</span>
+
+                Bạn đã từng kiểm tra các thiết bị đang đăng nhập
+                vào tài khoản thương mại điện tử của mình chưa?
+
+                <span class="required">*</span>
+
+            </div>
+
+
+            <div class="options">
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q8"
+                        value="A">
+
+                    <span class="option-text">
+                        A. Chưa bao giờ kiểm tra
+                    </span>
+                </label>
+
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q8"
+                        value="B">
+
+                    <span class="option-text">
+                        B. Không biết ứng dụng có chức năng này
+                    </span>
+                </label>
+
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q8"
+                        value="C">
+
+                    <span class="option-text">
+                        C. Chỉ kiểm tra khi nghi ngờ tài khoản có vấn đề
+                    </span>
+                </label>
+
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q8"
+                        value="D">
+
+                    <span class="option-text">
+                        D. Thỉnh thoảng kiểm tra
+                    </span>
+                </label>
+
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q8"
+                        value="E">
+
+                    <span class="option-text">
+                        E. Thường xuyên kiểm tra và đăng xuất
+                        những thiết bị không nhận diện được
+                    </span>
+                </label>
+
+            </div>
+
+            <div class="error-message">
+                ⚠️ Vui lòng chọn một đáp án.
+            </div>
+
+        </div>
+
+
+        <!-- =====================
+             CÂU 9
+        ====================== -->
+
+        <div
+            class="question"
+            data-question="q9">
+
+            <div class="question-title">
+
+                <span class="number">9</span>
+
+                Theo bạn, rủi ro bảo mật nào đáng lo ngại nhất
+                khi sử dụng ứng dụng thương mại điện tử trên điện thoại?
+
+                <span class="required">*</span>
+
+            </div>
+
+
+            <div class="options">
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q9"
+                        value="A">
+
+                    <span class="option-text">
+                        A. Điện thoại bị mất hoặc bị người khác truy cập
+                    </span>
+                </label>
+
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q9"
+                        value="B">
+
+                    <span class="option-text">
+                        B. Tài khoản bị đánh cắp do lộ mật khẩu
+                        hoặc mã OTP
+                    </span>
+                </label>
+
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q9"
+                        value="C">
+
+                    <span class="option-text">
+                        C. Bị lừa thông qua tin nhắn, đường link
+                        hoặc ứng dụng giả mạo
+                    </span>
+                </label>
+
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q9"
+                        value="D">
+
+                    <span class="option-text">
+                        D. Thông tin cá nhân như số điện thoại,
+                        địa chỉ, lịch sử mua hàng bị lộ
+                    </span>
+                </label>
+
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q9"
+                        value="E">
+
+                    <span class="option-text">
+                        E. Thông tin thẻ ngân hàng/ví điện tử
+                        và dữ liệu thanh toán bị đánh cắp
+                    </span>
+                </label>
+
+            </div>
+
+            <div class="error-message">
+                ⚠️ Vui lòng chọn một đáp án.
+            </div>
+
+        </div>
+
+
+        <!-- =====================
+             CÂU 10
+        ====================== -->
+
+        <div
+            class="question"
+            data-question="q10">
+
+            <div class="question-title">
+
+                <span class="number">10</span>
+
+                Theo bạn, người dùng nên thực hiện những biện pháp nào
+                để tăng cường an toàn thông tin khi sử dụng ứng dụng
+                thương mại điện tử trên điện thoại?
+
+                <span class="required">*</span>
+
+            </div>
+
+
+            <div class="options">
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q10"
+                        value="A">
+
+                    <span class="option-text">
+                        A. Sử dụng mật khẩu mạnh và không chia sẻ mã OTP
+                    </span>
+                </label>
+
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q10"
+                        value="B">
+
+                    <span class="option-text">
+                        B. Bật khóa màn hình bằng mật khẩu, PIN,
+                        vân tay hoặc Face ID
+                    </span>
+                </label>
+
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q10"
+                        value="C">
+
+                    <span class="option-text">
+                        C. Chỉ tải ứng dụng từ App Store/Google Play
+                        và thường xuyên cập nhật
+                    </span>
+                </label>
+
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q10"
+                        value="D">
+
+                    <span class="option-text">
+                        D. Kiểm soát quyền truy cập của ứng dụng
+                        và hạn chế sử dụng Wi-Fi công cộng khi giao dịch
+                    </span>
+                </label>
+
+
+                <label class="option">
+                    <input
+                        type="radio"
+                        name="q10"
+                        value="E">
+
+                    <span class="option-text">
+                        E. Kết hợp tất cả các biện pháp trên và thường xuyên
+                        kiểm tra tài khoản, giao dịch và thiết bị đăng nhập
+                    </span>
+                </label>
+
+            </div>
+
+            <div class="error-message">
+                ⚠️ Vui lòng chọn một đáp án.
+            </div>
+
+        </div>
+
+
+        <!-- =========================================
+             SUBMIT
+        ========================================= -->
+
+        <div class="submit-area">
+
+            <button
+                type="submit"
+                class="submit-btn"
+                id="submitBtn">
+
+                📤 Gửi khảo sát
+
+            </button>
+
+            <div class="note">
+                🔒 Khảo sát ẩn danh và chỉ phục vụ mục đích nghiên cứu học tập.
+            </div>
+
+        </div>
+
+    </form>
+
+
+    <!-- =========================================
+         FOOTER
+    ========================================= -->
+
+    <div class="footer">
+        Khảo sát Rủi ro bảo mật và quản trị an toàn thông tin
+        trên ứng dụng thương mại điện tử di động
+    </div>
+
+</div>
+
+
+<!-- =========================================
+     SUCCESS MODAL
+========================================= -->
+
+<div
+    class="modal-overlay"
+    id="successModal">
+
+    <div class="modal">
+
+        <div class="modal-icon">
+            ✅
+        </div>
+
+        <h2>
+            Gửi khảo sát thành công!
+        </h2>
+
+        <p>
+            Cảm ơn bạn đã dành thời gian hoàn thành khảo sát.<br>
+            Câu trả lời của bạn đã được ghi nhận.
+        </p>
+
+        <button
+            class="close-btn"
+            onclick="closeModal()">
+
+            Đóng
+
+        </button>
+
+    </div>
+
+</div>
+
+
+<script>
+
+    /* =========================================
+       GOOGLE APPS SCRIPT
+    ========================================= */
+
+    const SCRIPT_URL =
+        "https://script.google.com/macros/s/AKfycbyleZ17OCNHphdhTv3iERIW4ReCxsX5MObI_SblsRXaXjl1Sj12tii88BRYisUhwEB6Ng/exec";
+
+
+    /* =========================================
+       DANH SÁCH CÂU HỎI
+    ========================================= */
+
+    const questions = [
+        "q1",
+        "q2",
+        "q3",
+        "q4",
+        "q5",
+        "q6",
+        "q7",
+        "q8",
+        "q9",
+        "q10"
+    ];
+
+
+    /* =========================================
+       XỬ LÝ KHI CHỌN ĐÁP ÁN
+    ========================================= */
+
+    document
+        .querySelectorAll(".option input")
+        .forEach(function(input) {
+
+            input.addEventListener("change", function() {
+
+                const question =
+                    this.closest(".question");
+
+                /* Bỏ cảnh báo lỗi */
+                question.classList.remove("error");
+
+
+                /* Bỏ trạng thái selected */
+                question
+                    .querySelectorAll(".option")
+                    .forEach(function(option) {
+
+                        option.classList.remove("selected");
+
+                    });
+
+
+                /* Đánh dấu lựa chọn hiện tại */
+                this
+                    .closest(".option")
+                    .classList.add("selected");
+
+
+                updateProgress();
+
+            });
+
+        });
+
+
+    /* =========================================
+       CẬP NHẬT THANH TIẾN TRÌNH
+    ========================================= */
+
+    function updateProgress() {
+
+        let answered = 0;
+
+
+        questions.forEach(function(name) {
+
+            const selected =
+                document.querySelector(
+                    'input[name="' + name + '"]:checked'
+                );
+
+
+            if (selected) {
+                answered++;
+            }
+
+        });
+
+
+        const percent =
+            Math.round(
+                (answered / questions.length) * 100
+            );
+
+
+        document
+            .getElementById("progressBar")
+            .style.width = percent + "%";
+
+
+        document
+            .getElementById("progressText")
+            .textContent =
+                "Tiến trình: " + percent + "%";
+
+    }
+
+
+    /* =========================================
+       KIỂM TRA FORM
+    ========================================= */
+
+    function validateForm() {
+
+        let valid = true;
+
+        let firstError = null;
+
+
+        questions.forEach(function(name) {
+
+            const question =
+                document.querySelector(
+                    '[data-question="' + name + '"]'
+                );
+
+
+            const selected =
+                document.querySelector(
+                    'input[name="' + name + '"]:checked'
+                );
+
+
+            if (!selected) {
+
+                question.classList.add("error");
+
+                valid = false;
+
+
+                if (!firstError) {
+                    firstError = question;
+                }
+
+            } else {
+
+                question.classList.remove("error");
+
+            }
+
+        });
+
+
+        if (firstError) {
+
+            firstError.scrollIntoView({
+                behavior: "smooth",
+                block: "center"
+            });
+
+        }
+
+
+        return valid;
+
+    }
+
+
+    /* =========================================
+       LẤY DỮ LIỆU KHẢO SÁT
+    ========================================= */
+
+    function getSurveyData() {
+
+        const data = {};
+
+
+        questions.forEach(function(name) {
+
+            const selected =
+                document.querySelector(
+                    'input[name="' + name + '"]:checked'
+                );
+
+
+            data[name] =
+                selected
+                    ? selected.value
+                    : "";
+
+        });
+
+
+        data.timestamp =
+            new Date().toISOString();
+
+
+        return data;
+
+    }
+
+
+    /* =========================================
+       GỬI KHẢO SÁT
+    ========================================= */
+
+    document
+        .getElementById("surveyForm")
+        .addEventListener("submit", async function(event) {
+
+            event.preventDefault();
+
+
+            /* Kiểm tra đủ 10 câu */
+
+            if (!validateForm()) {
+
+                alert(
+                    "Vui lòng hoàn thành tất cả 10 câu hỏi."
+                );
+
+                return;
+
+            }
+
+
+            const submitButton =
+                document.getElementById("submitBtn");
+
+
+            submitButton.disabled = true;
+
+            submitButton.textContent =
+                "⏳ Đang gửi khảo sát...";
+
+
+            const data =
+                getSurveyData();
+
+
+            try {
+
+                await fetch(
+                    SCRIPT_URL,
+                    {
+                        method: "POST",
+
+                        mode: "no-cors",
+
+                        headers: {
+                            "Content-Type":
+                                "text/plain;charset=utf-8"
+                        },
+
+                        body:
+                            JSON.stringify(data)
+                    }
+                );
+
+
+                /* Hiện thông báo thành công */
+
+                document
+                    .getElementById("successModal")
+                    .classList.add("show");
+
+
+                submitButton.disabled = false;
+
+                submitButton.textContent =
+                    "📤 Gửi khảo sát";
+
+
+            } catch (error) {
+
+                console.error(error);
+
+
+                alert(
+                    "Có lỗi xảy ra khi gửi khảo sát. Vui lòng thử lại."
+                );
+
+
+                submitButton.disabled = false;
+
+                submitButton.textContent =
+                    "📤 Gửi khảo sát";
+
+            }
+
+        });
+
+
+    /* =========================================
+       ĐÓNG THÔNG BÁO
+    ========================================= */
+
+    function closeModal() {
+
+        document
+            .getElementById("successModal")
+            .classList.remove("show");
+
+    }
+
+
+    /* =========================================
+       KHỞI ĐỘNG
+    ========================================= */
+
+    updateProgress();
+
+</script>
+
+</body>
+
+</html>
